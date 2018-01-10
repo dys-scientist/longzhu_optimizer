@@ -3,6 +3,7 @@ longzhu optimizer
 
 #### // TODO ####
 *   加入屏蔽广告区域功能
+*   干掉右下角小狮子
 
 
 
