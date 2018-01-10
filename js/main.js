@@ -40,7 +40,9 @@ lz.toggle = function(status){
 		
 	}
     
-    function checker(){		
+    function checker(){
+	
+		$( '#live-player' ).find( '.tp-link.report-rbi-static' ).hide()
 		
 		$( '#chat-limit-scroll-container' ).find( '.effect-panel-outer' ).hide();
 		

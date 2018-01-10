@@ -1,13 +1,11 @@
 {
-	"name": "龙珠弹幕小助手",
+	"name": "德云色の科学家助手",
 	
 	"manifest_version": 2,	
 	
-	"version": "1.0.0",
+	"version": "1.0.2",
 	
-	"homepage_url": "https://github.com/dys-scientist/longzhu_plugin",
-	
-	"author":"德云色科学家分部",
+	"author":"lync",
 	
 	"icons": {
 	
