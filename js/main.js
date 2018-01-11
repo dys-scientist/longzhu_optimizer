@@ -31,7 +31,7 @@ lz.toggle = function(status){
 
     function removeAd() {
         /*
-        * @author ziyucao        
+        * @author ziyucao
         */
         $('.quiz-intrduction').remove();
         $('.images-link-sp').attr("style", "margin-bottom:160px");
@@ -50,7 +50,9 @@ lz.toggle = function(status){
         $('.stage').attr("style", "");
         $('.top-banner-pic').remove();
         $('.chatroom-ap').remove();
+
         $('#chat-limit-scroll-container').find('.effect-panel-outer').hide();
+        $('.chatroom-con').css('user-select','auto');
     }
 
     function checker(){
