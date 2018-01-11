@@ -3,7 +3,7 @@
 	
 	"manifest_version": 2,	
 	
-	"version": "1.0.2",
+	"version": "1.0.3",
 	
 	"author":"lync",
 	
@@ -25,7 +25,7 @@
 		
 		"activeTab",
 		
-		"http://star.longzhu.com/777777",
+		"http://star.longzhu.com/777777*",
 		
 		"history"
 		
@@ -41,7 +41,7 @@
 	
 	"content_scripts":[{
 	
-		"matches": ["http://star.longzhu.com/777777"],
+		"matches": ["http://star.longzhu.com/777777*"],
 		
 		"js":["js/jquery-2.2.1.min.js","js/main.js"],
 		
