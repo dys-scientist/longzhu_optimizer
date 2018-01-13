@@ -1,4 +1,4 @@
-var lz = lz || {};
+﻿var lz = lz || {};
 
 lz.allowed = false;
 
@@ -20,6 +20,11 @@ lz.toggle = function(status){
     }
 
     function start(){
+	
+		/*
+        * @author lync
+        */
+		optimizeCss();
     
         removeAd();
     
@@ -51,11 +56,45 @@ lz.toggle = function(status){
         $('.top-banner-pic').remove();
         $('.chatroom-ap').remove();
 
+		$('#right-nav').remove();
         $('#chat-limit-scroll-container').find('.effect-panel-outer').hide();
-        $('.chatroom-con').css('user-select','auto');
+		
+        $( '.chatroom-con' ).css( 'user-select','auto' );
+		$( '#right-nav' ).remove();
+		
+		$( '.gallery' ).remove();
+		$( '.bottom-image-small' ).remove();
     }
+	
+	function optimizeCss(){
+	
+		$( '.header' ).css( 'border-radius' , '4px 4px 4px 4px' );
+		
+		$( '.stage-container-right' ).css( 'border-radius','0px 4px 4px 0px' );
+		
+		// 将竞猜模块移动到聊天窗口方便操作
+		var l = $( '#chatroom-tabs' ).find( '.goog-tab' ).length;
+		
+		$( $( '#chatroom-tabs' ).find( '.goog-tab' )[l-1]).text( '德云色竞猜党' );
+		
+		// 移除礼物列表
+		$( '#gift-history-list-scroll' ).hide();
+		
+		$( '.gift-history-list' ).append( $('#guess') );
+		
+		
+		
+	}
 
     function checker(){
+		/*
+        * @author lync
+        */
+		
+		// 屏蔽贵族进场特效
+		$( '#chat-limit-scroll-container' ).find( '.pt-cars-enter' ).hide();
+		
+		$( '#chat-limit-scroll-container' ).find( '.user_enter_msg' ).hide();
     
         $( '#live-player' ).find( '.tp-link.report-rbi-static' ).hide()
         
