@@ -33,6 +33,7 @@ lz.toggle = function(status){
         /*
         * @author ziyucao
         */
+        $('.gallery').remove();
         $('.quiz-intrduction').remove();
         $('.images-link-sp').attr("style", "margin-bottom:160px");
         $('.stage-inner').attr("style", "position: relative; padding-right:6rem; padding-bottom:50px");
