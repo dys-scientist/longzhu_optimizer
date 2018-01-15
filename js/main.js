@@ -66,9 +66,16 @@ lz.toggle = function(status){
         * @author lync
         */
 		// 优化公告样式
-		setTimeout( function(){ $( '.announcement-title' ).css( {'padding':'8px 0px 0px 15px', 'border-bottom':0 } ); }, 0 );
-		$( '.announcement-title' ).find( 'i' ).remove();		
-	
+		setTimeout( function(){ 
+		
+			$( '.announcement-title' ).css( {'padding':'8px 0px 0px 15px', 'border-bottom':0 } ); 
+			
+			$( '.announcement-container' ).css( 'padding', '14px 15px' );
+			
+		}, 0 );
+		
+		$( '.announcement-title' ).find( 'i' ).remove();	
+				
 		$( '.header' ).css( 'border-radius' , '4px 0px 0px 4px' );
 		
 		$( '.stage-container-right' ).css( 'border-radius','0px 4px 4px 0px' );
