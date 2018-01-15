@@ -57,9 +57,17 @@ lz.toggle = function(status){
 
         $( '.chatroom-con' ).css( 'user-select','auto' );
 		$( '#right-nav' ).remove();
+
     }
 	
 	function optimizeCss(){
+	
+		 /**
+        * @author lync
+        */
+		// 优化公告样式
+		setTimeout( function(){ $( '.announcement-title' ).css( {'padding':'8px 0px 0px 15px', 'border-bottom':0 } ); }, 0 );
+		$( '.announcement-title' ).find( 'i' ).remove();		
 	
 		$( '.header' ).css( 'border-radius' , '4px 0px 0px 4px' );
 		
