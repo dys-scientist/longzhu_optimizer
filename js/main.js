@@ -50,6 +50,9 @@ lz.toggle = function(status){
         $('.top-banner-pic').remove();
         $('.chatroom-ap').remove();
         $('.lobster-small').remove();
+        /**
+         *
+         */
 
         $( '#right-nav' ).remove();
 
@@ -126,6 +129,7 @@ lz.toggle = function(status){
         $('#chatroom').css('border-radius', '0 4px 4px 0');
         $('.showFans').css('border-radius', '4px 0 0 4px');
         $('#chatroom-button').css('border-radius', '0 4px 4px 0');
+        $('#chatroom-input').css('border-radius', '4px 0 0 4px');
         $('.feed-pane-count').css({'border-radius': '4px 4px 4px 4px',
             'padding': '0 6px 0 4px'});
         $('.feed-pane').css({'border-radius': '4px 4px 4px 4px',
@@ -134,8 +138,27 @@ lz.toggle = function(status){
 
         // 输入区域颜色调整
         // $('.chatroom-editor').css('background-color', '#fff');
+
+        afterResize();
+        $(window).resize(afterResize);
 	}
 
+	function afterResize() {
+        /**
+         * @author ziyucao
+         */
+        // 移除左边导航栏后页面调整
+        $('.stage').css('padding-left', '0');
+        // 调整播放器高度适应策略
+        setTimeout(function () {
+            var liveWidth = $('#live-player').width();
+            var liveHeight = liveWidth/16*9;
+            var windowHeight = $(window).height();
+            windowHeight = windowHeight > 300 ? windowHeight : 300;
+            liveHeight = liveHeight + 118 > windowHeight? liveHeight + 118 : windowHeight - 118;
+            $('#live-player').css('height', liveHeight);
+            }, 100);
+    }
     function checker(){
 		/*
         * @author lync
@@ -170,12 +193,6 @@ lz.toggle = function(status){
             
         }
 
-        /**
-         * @author ziyucao
-         */
-        // 移除左边导航栏后页面调整
-        $('.stage').css('padding-left', '0');
-        
         if( lz.allowed ) requestAnimationFrame( checker );
     }
 
