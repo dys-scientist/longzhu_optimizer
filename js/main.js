@@ -5,36 +5,88 @@ lz.allowed = false;
 lz.firstRun = true;
 
 
-lz.toggle = function(status){
+lz.toggle = function( status ){
 
-    lz.allowed = status;    
+    lz.allowed = ( status != 0 ? true : false );
 
     if( lz.allowed ){
     
-        start();
+        handle( status );
+		
+		if( lz.allowed ) requestAnimationFrame( checker );
+			
+		if( lz.firstRun ) lz.firstRun = false;
         
     }else{
     
-        pause();
+        stop();
         
     }
 
-    function start(){
-	
+    function handle( mode ){
+		
 		/*
         * @author lync
         */
-		optimizeCss();
-    
-        removeAd();
-    
-        if( lz.allowed ) requestAnimationFrame( checker );
-        
-        if( lz.firstRun ) lz.firstRun = false;
+		
+		//常规模式
+		if( mode == 1 ){
+		
+			optimizeCss();
+		
+			removeAd();
+					
+		}
+		//全屏模式
+		else if( mode == 2 ){
+			
+			fullscreen();
+			
+		}
         
     }
+	
+	function fullscreen(){
+	
+		$( '.header' ).hide();
+		
+		$( '#topbar' ).hide();
+
+		$( '.play_back' ).hide();
+		
+		$( '.live-player' ).height( $( window ).height()-64 );
+		
+		$( '.stage-container-live' ).css({ 'margin-top': 0 });
+		
+		$( '#stage-center' ).css({ 'padding-top': 0 });
+		
+		$( '.live' ).css({ 'right': '340px' });
+		
+		$( '.stage-inner' ).css({ 'padding': 0 });
+		
+		$( '.ptc-footer' ).remove();
+		
+		$( '.stage-container.stage-container-live' ).css({  'width': 'auto!important',
+															'position': 'fixed!important',
+															'top': '0!important',
+															'right': '0!important',
+															'left': '0!important',
+															'bottom': '0!important',
+															'overflow-x': 'auto!important',
+															'min-width': '0!important'});
+		
+	}
 
     function removeAd() {
+	
+		/**
+        * @author lync
+        */
+		//移除小龙龙
+		$('.task_finished_dialog').remove();
+		//移除爆灯
+		$('#activity-entry-newyear').remove();
+
         /**
         * @author ziyucao
         */
@@ -62,7 +114,7 @@ lz.toggle = function(status){
 	
 	function optimizeCss(){
 	
-		 /**
+		/**
         * @author lync
         */
 		// 优化公告样式
@@ -83,7 +135,7 @@ lz.toggle = function(status){
 		// 将竞猜模块移动到聊天窗口方便操作
 		var l = $( '#chatroom-tabs' ).find( '.goog-tab' ).length;
 		
-		$( $( '#chatroom-tabs' ).find( '.goog-tab' )[l-1]).text( '德云色竞猜党' );
+		$( $( '#chatroom-tabs' ).find( '.goog-tab' )[l-1] ).text( '【德云色竞猜党】' ).css( 'color', '#ff0000' );
 		
 		// 移除礼物列表
 		$( '#gift-history-list-scroll' ).hide();
@@ -179,10 +231,10 @@ lz.toggle = function(status){
         if( lz.allowed ) requestAnimationFrame( checker );
     }
 
-    function pause() {
+    function stop() {
 
-        cancelAnimationFrame();
-
+        window.location.reload();
+		
     }
 
 }
