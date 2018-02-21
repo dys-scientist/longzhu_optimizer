@@ -1,4 +1,5 @@
-var lzStatus = false;
+//0停止 1普通模式 2影院模式
+var lzStatus = 0;
 
 var matchDomain = false;
 
@@ -16,7 +17,7 @@ chrome.tabs.onUpdated.addListener(function( tab ){
 
 chrome.history.onVisited.addListener(function( historyItem ){
 
-    lzStatus = false;
+    lzStatus = 0;
 	
     checkDomain( historyItem );
 
@@ -40,15 +41,44 @@ function update( tab ) {
 
     currentTabId = tab.id;
     
-    lzStatus = !lzStatus;
+    if( lzStatus < 2 ) lzStatus++; 
 	
-    var icon = lzStatus ? "img/icon_busy.png" : "img/icon_normal.png";
+	else lzStatus = 0;
+	
+	
+	var icon;
+	
+	switch( lzStatus ){
+	
+		case 0:
+		
+			icon = "img/icon_normal.png";
+			
+		break;
+		
+		case 1:
+		
+			icon = "img/icon_busy.png";
+		
+		break;
+			
+		case 2:
+			
+			icon = "img/icon_fs.png";
+		
+		break;
+		
+		default:
+			
+			icon = "img/icon_normal.png";
+		
+	}    
 	
     chrome.browserAction.setIcon({ path:icon });
 	
     chrome.tabs.executeScript({
 	
-        code:'lz.toggle && lz.toggle('+lzStatus+');'
+        code: 'lz.toggle && lz.toggle(' + lzStatus + ');'
 		
     });
 }
@@ -65,7 +95,7 @@ function checkDomain( obj ){
 
     if( obj && obj.url ){
 	
-        matchDomain = obj.url.search( /longzhu\.com/ig ) == -1 ? false : true;
+		matchDomain = obj.url.search( "http://star.longzhu.com/777777" ) == -1 ? false : true;
 		
     }else{
 	
