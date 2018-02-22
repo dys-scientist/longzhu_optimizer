@@ -151,12 +151,7 @@ lz.toggle = function( status ){
 		$( '.header' ).css( 'border-radius' , '4px 0px 0px 4px' );
 		
 		$( '.stage-container-right' ).css( 'border-radius','0px 4px 4px 0px' );
-		
-		// 将竞猜模块移动到聊天窗口方便操作
-		var l = $( '#chatroom-tabs' ).find( '.goog-tab' ).length;
-		
-		$( $( '#chatroom-tabs' ).find( '.goog-tab' )[l-1] ).text( '【德云色竞猜党】' ).css( 'color', '#ff0000' );
-		
+				
 		// 移除礼物列表
 		$( '#gift-history-list-scroll' ).hide();
 		
