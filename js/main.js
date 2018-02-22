@@ -31,16 +31,23 @@ lz.toggle = function( status ){
 		
 		//常规模式
 		if( mode == 1 ){
+
+		    //@ziyucao 0.5s延时防止网页没有加载完
+            setTimeout(function () {
+                optimizeCss();
+
+                removeAd();
+            }, 500);
 		
-			optimizeCss();
-		
-			removeAd();
+
 					
 		}
 		//全屏模式
 		else if( mode == 2 ){
-			
-			fullscreen();
+
+            setTimeout(function () {
+                fullscreen();
+            }, 500);
 			
 		}
         
@@ -54,8 +61,6 @@ lz.toggle = function( status ){
 
 		$( '.play_back' ).hide();
 		
-		$( '.live-player' ).height( $( window ).height()-64 );
-		
 		$( '.stage-container-live' ).css({ 'margin-top': 0 });
 		
 		$( '#stage-center' ).css({ 'padding-top': 0 });
@@ -65,17 +70,31 @@ lz.toggle = function( status ){
 		$( '.stage-inner' ).css({ 'padding': 0 });
 		
 		$( '.ptc-footer' ).remove();
-		
-		$( '.stage-container.stage-container-live' ).css({  'width': 'auto!important',
-															'position': 'fixed!important',
-															'top': '0!important',
-															'right': '0!important',
-															'left': '0!important',
-															'bottom': '0!important',
-															'overflow-x': 'auto!important',
-															'min-width': '0!important'});
-		
+
+        $( '.stage-container.stage-container-live' ).css({  'width': 'auto!important',
+            'position': 'fixed!important',
+            'top': '0!important',
+            'right': '0!important',
+            'left': '0!important',
+            'bottom': '0!important',
+            'overflow-x': 'auto!important',
+            'min-width': '0!important'});
+
+
+        afterResizeFull();
+        $(window).resize(afterResizeFull);
 	}
+
+	function afterResizeFull() {
+        /**
+         * @author ziyucao
+         */
+
+        setTimeout(function () {
+            $('.live-player').height($(window).height() - 64);
+        }, 100);
+
+    }
 
     function removeAd() {
 	
@@ -102,8 +121,9 @@ lz.toggle = function( status ){
         $('.top-banner-pic').remove();
         $('.chatroom-ap').remove();
         $('.lobster-small').remove();
-
-        $( '#right-nav' ).remove();
+        /**
+         *
+         */
 
         $( '#chat-limit-scroll-container' ).find( '.effect-panel-outer' ).hide();
 
@@ -178,16 +198,33 @@ lz.toggle = function( status ){
         $('#chatroom').css('border-radius', '0 4px 4px 0');
         $('.showFans').css('border-radius', '4px 0 0 4px');
         $('#chatroom-button').css('border-radius', '0 4px 4px 0');
+        $('#chatroom-input').css('border-radius', '4px 0 0 4px');
         $('.feed-pane-count').css({'border-radius': '4px 4px 4px 4px',
             'padding': '0 6px 0 4px'});
         $('.feed-pane').css({'border-radius': '4px 4px 4px 4px',
             'padding-right': '8px'});
         $('.header-avatar-img').css('border-radius', '4px');
 
-        // 输入区域颜色调整
-        // $('.chatroom-editor').css('background-color', '#fff');
+        afterResize();
+        $(window).resize(afterResize);
 	}
 
+	function afterResize() {
+        /**
+         * @author ziyucao
+         */
+        // 移除左边导航栏后页面调整
+        $('.stage').css('padding-left', '0');
+        // // 调整播放器高度适应策略
+        // setTimeout(function () {
+        //     var liveWidth = $('#live-player').width();
+        //     var liveHeight = liveWidth/16*9;
+        //     var windowHeight = $(window).height();
+        //     windowHeight = windowHeight > 300 ? windowHeight : 300;
+        //     liveHeight = liveHeight + 118 > windowHeight? liveHeight + 118 : windowHeight - 118;
+        //     $('#live-player').css('height', liveHeight);
+        //     }, 100);
+    }
     function checker(){
 		/*
         * @author lync
@@ -222,12 +259,6 @@ lz.toggle = function( status ){
             
         }
 
-        /**
-         * @author ziyucao
-         */
-        // 移除左边导航栏后页面调整
-        $('.stage').css('padding-left', '0');
-        
         if( lz.allowed ) requestAnimationFrame( checker );
     }
 
